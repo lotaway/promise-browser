@@ -123,6 +123,14 @@
             });
         }
     }
+    //  如果抛出错误则将其包装为异步catch
+    _Promise.try = function (callback) {
+        try {
+            return callback();
+        } catch (error) {
+            return Promise.reject(error);
+        }
+    }
     _Promise.prototype._handler = function (targetArr) {
         while (targetArr.length) {
             var nextObj = targetArr.shift()
